@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "439007604436",
+    "project_id": "multistoreapp-a9203",
+    "storage_bucket": "multistoreapp-a9203.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439007604436:android:7b2304407fe4aa96b75541",
+        "android_client_info": {
+          "package_name": "com.example.mystoreapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBo_Un5OjR9UORFlBAht6fD6_XhByvud0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439007604436:android:31de8376f9a8a2cab75541",
+        "android_client_info": {
+          "package_name": "com.example.papeleriaapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBo_Un5OjR9UORFlBAht6fD6_XhByvud0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
