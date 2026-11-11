@@ -42,6 +42,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.papeleriaapp.core.cart.CartItem
 import com.example.papeleriaapp.core.util.FormatUtils
+import com.example.papeleriaapp.presentation.component.EmptyGlyph
+import com.example.papeleriaapp.presentation.component.EmptyStateIllustration
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -98,6 +100,8 @@ fun CartScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
+                    EmptyStateIllustration(glyph = EmptyGlyph.CART)
+                    Spacer(modifier = Modifier.height(12.dp))
                     Text(text = "Tu carrito está vacío")
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(

@@ -50,6 +50,9 @@ import com.example.papeleriaapp.core.model.Product
 import com.example.papeleriaapp.core.model.StationeryCategories
 import com.example.papeleriaapp.core.util.FormatUtils
 import com.example.papeleriaapp.presentation.component.CategoryDropdown
+import com.example.papeleriaapp.presentation.component.EmptyGlyph
+import com.example.papeleriaapp.presentation.component.EmptyStateIllustration
+import com.example.papeleriaapp.presentation.component.StockLevelBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -181,6 +184,8 @@ fun CustomerHomeScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
+                        EmptyStateIllustration(glyph = EmptyGlyph.SEARCH)
+                        Spacer(modifier = Modifier.height(12.dp))
                         Text(text = "No se encontraron productos en el catálogo.")
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
@@ -252,8 +257,15 @@ private fun ProductCard(
 
             Text(
                 text = if (product.stock > 0) "Disponible: ${product.stock}" else "Agotado",
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodySmall,
+                color = if (product.stock > 0) MaterialTheme.colorScheme.onSurface
+                else MaterialTheme.colorScheme.error
             )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            //Nivel de stock dibujado con Canvas
+            StockLevelBar(stock = product.stock)
 
             Spacer(modifier = Modifier.height(8.dp))
 

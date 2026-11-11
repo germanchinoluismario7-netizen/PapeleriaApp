@@ -37,6 +37,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.papeleriaapp.core.model.Order
 import com.example.papeleriaapp.core.model.OrderStatus
 import com.example.papeleriaapp.core.util.FormatUtils
+import com.example.papeleriaapp.presentation.component.EmptyGlyph
+import com.example.papeleriaapp.presentation.component.EmptyStateIllustration
+import com.example.papeleriaapp.presentation.component.OrderStatusStepper
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -111,6 +114,8 @@ fun OrdersScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
+                        EmptyStateIllustration(glyph = EmptyGlyph.RECEIPT)
+                        Spacer(modifier = Modifier.height(12.dp))
                         Text(text = "Todavía no has realizado pedidos")
                     }
                 }
@@ -154,6 +159,12 @@ private fun OrderCard(
                 )
 
                 StatusChip(status = order.status)
+            }
+
+            //Avance del pedido dibujado con Canvas
+            if (order.status != OrderStatus.CANCELADO.name) {
+                Spacer(modifier = Modifier.height(8.dp))
+                OrderStatusStepper(status = order.status)
             }
 
             Spacer(modifier = Modifier.height(8.dp))

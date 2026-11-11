@@ -47,6 +47,9 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.papeleriaapp.core.model.Product
 import com.example.papeleriaapp.core.util.FormatUtils
+import com.example.papeleriaapp.presentation.component.EmptyGlyph
+import com.example.papeleriaapp.presentation.component.EmptyStateIllustration
+import com.example.papeleriaapp.presentation.component.StockLevelBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -160,6 +163,8 @@ fun SellerProductsScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
+                        EmptyStateIllustration(glyph = EmptyGlyph.BOX)
+                        Spacer(modifier = Modifier.height(12.dp))
                         Text(text = "Aún no tienes productos")
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
@@ -301,6 +306,11 @@ private fun ProductRow(
                     else MaterialTheme.colorScheme.error
                 )
             }
+
+            Spacer(modifier = Modifier.height(6.dp))
+
+            //Nivel de stock dibujado con Canvas
+            StockLevelBar(stock = product.stock)
         }
     }
 }

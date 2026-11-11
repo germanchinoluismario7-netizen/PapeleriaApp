@@ -46,6 +46,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.papeleriaapp.core.model.Order
 import com.example.papeleriaapp.core.model.OrderStatus
 import com.example.papeleriaapp.core.util.FormatUtils
+import com.example.papeleriaapp.presentation.component.ArcStatCard
+import com.example.papeleriaapp.presentation.component.EmptyGlyph
+import com.example.papeleriaapp.presentation.component.EmptyStateIllustration
 import com.example.papeleriaapp.presentation.orders.StatusChip
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -111,6 +114,40 @@ fun SellerHomeScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            //Panel de estadisticas con medidores dibujados con Canvas
+            if (!state.isLoading && state.errorMessage == null && state.orders.isNotEmpty()) {
+                val totalOrders = state.orders.size
+                val pendingOrders = state.orders.count {
+                    it.status == OrderStatus.PENDIENTE.name
+                }
+                val deliveredOrders = state.orders.count {
+                    it.status == OrderStatus.ENTREGADO.name
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    ArcStatCard(
+                        label = "Pendientes",
+                        value = pendingOrders.toString(),
+                        progress = pendingOrders.toFloat() / totalOrders,
+                        accent = MaterialTheme.colorScheme.tertiary,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    ArcStatCard(
+                        label = "Entregados",
+                        value = deliveredOrders.toString(),
+                        progress = deliveredOrders.toFloat() / totalOrders,
+                        accent = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
             when {
                 state.isLoading -> {
                     Column(
@@ -137,6 +174,8 @@ fun SellerHomeScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
+                        EmptyStateIllustration(glyph = EmptyGlyph.RECEIPT)
+                        Spacer(modifier = Modifier.height(12.dp))
                         Text(text = "Aún no hay pedidos en tu papelería")
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
